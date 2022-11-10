@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_091515) do
+ActiveRecord::Schema.define(version: 2022_11_10_094039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "departments", comment: "This table is for the list of departments", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "intermediate_head", null: false, comment: "This is the employee id of the intermediate head"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "employee_daily_logs", comment: "This table is for the daily logs of the employees and it consists the employee time log record", force: :cascade do |t|
     t.string "type", null: false
