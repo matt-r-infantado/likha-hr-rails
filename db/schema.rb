@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_074418) do
+ActiveRecord::Schema.define(version: 2022_11_10_084307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employee_time_logs", comment: "This table is for the time logs of the employees", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.time "clock_in"
+    t.time "clock_out"
+    t.date "entry_date", null: false
+    t.string "notes"
+    t.datetime "deleted_at", default: "1000-01-01 00:00:00", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "employees", comment: "This table is for the list of employees", force: :cascade do |t|
     t.string "last_name", null: false
