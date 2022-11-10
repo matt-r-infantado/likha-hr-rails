@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_085353) do
+ActiveRecord::Schema.define(version: 2022_11_10_091515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 2022_11_10_085353) do
     t.date "entry_date", null: false
     t.string "notes"
     t.datetime "deleted_at", default: "1000-01-01 00:00:00", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employee_monthly_subsidy_reports", comment: "This table is for storing monthly subsidies per employee", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.integer "days_reported", null: false
+    t.string "benefit_type", null: false, comment: "This is the type of benefit"
+    t.decimal "total_subsidy", precision: 18, scale: 2, null: false, comment: "This is total amount of subsidy"
+    t.integer "month", null: false
+    t.integer "year", null: false
+    t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

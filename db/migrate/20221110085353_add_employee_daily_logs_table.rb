@@ -5,7 +5,7 @@ class AddEmployeeDailyLogsTable < ActiveRecord::Migration[6.0]
       t.bigint :employee_time_log_id, null: false
       t.date :entry_date, null: false
       t.string :notes
-      t.datetime "deleted_at", default: "1000-01-01 00:00:00", null: false
+      t.datetime :deleted_at, default: "1000-01-01 00:00:00", null: false
 
       t.timestamps
     end
