@@ -21,6 +21,8 @@ class Api::EmployeesController < ApplicationController
   end
 
   def update
+    update_employee = target_employee.update!(update_params)
+    update_employee
   end
 
   class EmployeeSerializer < ActiveModel::Serializer
@@ -87,6 +89,24 @@ class Api::EmployeesController < ApplicationController
 
   def show_param
     params.permit(:id)
+  end
+
+  def update_params
+    params.permit(:id,
+      :last_name,
+      :first_name,
+      :middle_name,
+      :birth_date,
+      :contact_number,
+      :email,
+      :position,
+      :department_id,
+      :status)
+  end
+
+  def target_employee
+    emp = Employee.find(update_params[:id])
+    emp
   end
 
 end
