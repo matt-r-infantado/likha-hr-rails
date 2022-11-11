@@ -45,3 +45,8 @@ gem 'dotenv-rails'
 gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
+
+gem 'pry-byebug'
+gem 'pry-rails'
+
+gem 'active_model_serializers', '0.8.1'
