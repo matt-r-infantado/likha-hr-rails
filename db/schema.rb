@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_100021) do
+ActiveRecord::Schema.define(version: 2022_11_11_023152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(version: 2022_11_10_100021) do
   end
 
   create_table "employee_daily_logs", comment: "This table is for the daily logs of the employees and it consists the employee time log record", force: :cascade do |t|
-    t.string "type", null: false
+    t.bigint "employee_id", null: false
     t.bigint "employee_time_log_id", null: false
+    t.string "type", null: false
     t.date "entry_date", null: false
     t.string "notes"
     t.datetime "deleted_at", default: "1000-01-01 00:00:00", null: false
