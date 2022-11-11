@@ -1,6 +1,7 @@
 class Api::EmployeesController < ApplicationController
   def create
     Employees::CreateEmployeeService.execute(employee: create_params)
+    render json: {}
   end
   
   def index
@@ -8,7 +9,7 @@ class Api::EmployeesController < ApplicationController
     
     render json: ActiveModel::ArraySerializer.new(
       employees,
-      each_serializer: EmployeeSerializer,
+      each_serializer: EmployeeListItemSerializer,
       root: false).as_json
   end
 
@@ -21,11 +22,11 @@ class Api::EmployeesController < ApplicationController
   end
 
   def update
-    update_employee = target_employee.update!(update_params)
-    update_employee
+    updated_employee = target_employee.update!(update_params)
+    render json: {}
   end
 
-  class EmployeeSerializer < ActiveModel::Serializer
+  class EmployeeListItemSerializer < ActiveModel::Serializer
     attributes :id,
                :email_address,
                :full_name,
@@ -57,7 +58,7 @@ class Api::EmployeesController < ApplicationController
       object[:status]
     end
   end
-
+  
   class EmployeeDetailSerializer < ActiveModel::Serializer
     attributes :id,
                :last_name,
@@ -71,7 +72,7 @@ class Api::EmployeesController < ApplicationController
                :status
   end
 
-  private_constant :EmployeeSerializer
+  private_constant :EmployeeListItemSerializer
 
   private
 
