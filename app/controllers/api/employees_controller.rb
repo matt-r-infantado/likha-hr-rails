@@ -1,6 +1,6 @@
 class Api::EmployeesController < ApplicationController
   def create
-    Employees::CreateEmployeeService.execute(employee: employee_params)
+    Employees::CreateEmployeeService.execute(employee: create_params)
   end
   
   def index
@@ -13,7 +13,11 @@ class Api::EmployeesController < ApplicationController
   end
 
   def show
+    employee = Employees::FetchDetailService.execute(id: show_param[:id])
 
+    render json: EmployeeDetailSerializer.new(
+      employee,
+      root: false).as_json
   end
 
   def update
@@ -52,11 +56,24 @@ class Api::EmployeesController < ApplicationController
     end
   end
 
+  class EmployeeDetailSerializer < ActiveModel::Serializer
+    attributes :id,
+               :last_name,
+               :first_name,
+               :middle_name,
+               :birth_date,
+               :contact_number,
+               :email,
+               :department_id,
+               :position,
+               :status
+  end
+
   private_constant :EmployeeSerializer
 
   private
 
-  def employee_params
+  def create_params
     params.permit(:last_name,
       :first_name,
       :middle_name,
@@ -66,6 +83,10 @@ class Api::EmployeesController < ApplicationController
       :position,
       :department_id,
       :status)
+  end
+
+  def show_param
+    params.permit(:id)
   end
 
 end
