@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_094039) do
+ActiveRecord::Schema.define(version: 2022_11_10_100021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "benefits", comment: "This table is the list of benefits available in the company", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type", null: false
+    t.decimal "rate", precision: 18, scale: 2, null: false, comment: "This is the rate or amount of subsidy"
+    t.datetime "deleted_at", default: "1000-01-01 00:00:00", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "departments", comment: "This table is for the list of departments", force: :cascade do |t|
     t.string "name", null: false
